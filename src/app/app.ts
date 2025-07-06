@@ -27,24 +27,23 @@ export class App implements AfterViewInit {
   // Projects
   projects: Project[] = projects;
   selectedProject: Project | null = null;
-  closingPanel: boolean = false;
+  closingPanel: boolean = false; // เพิ่มตัวแปรสำหรับ animation ปิด
 
   selectProject(project: Project) {
     this.selectedProject = project;
     this.closingPanel = false;
-
-    // ปิด panel ก่อนหน้าเมื่อเลือก project ใหม่
-    setTimeout(() => {
-      this.closingPanel = false;
-    }, 10);
   }
 
   closePanel() {
-    this.closingPanel = true;
-    setTimeout(() => {
-      this.selectedProject = null;
-      this.closingPanel = false;
-    }, 300);
+    if (this.selectedProject && !this.closingPanel) {
+      this.closingPanel = true;
+
+      // รอให้ animation slide out เสร็จสมบูรณ์ก่อนลบข้อมูล
+      setTimeout(() => {
+        this.selectedProject = null;
+        this.closingPanel = false;
+      }, 100); // ตรงกับระยะเวลาของ transition
+    }
   }
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
