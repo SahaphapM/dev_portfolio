@@ -16,7 +16,7 @@ COPY . .
 
 # Build the Angular application for production
 # The output will be in the 'dist' directory (e.g., dist/dev_portfolio)
-RUN ng build --configuration production --output-hashing none
+RUN ng build --configuration production
 
 # Stage 2: Serve the application with 'serve'
 FROM node:20-alpine AS serve
@@ -30,7 +30,7 @@ WORKDIR /app
 # --- แก้ไขบรรทัดนี้ ---
 # Copy the built Angular application from the build stage, specifically from the 'browser' subfolder
 # ตรวจสอบให้แน่ใจว่า 'dev_portfolio' ตรงกับชื่อโปรเจกต์ใน angular.json และโครงสร้าง dist/ ของคุณ
-COPY --from=build /app/dist/dev_portfolio/browser ./
+COPY --from=build /app/dist/dev_portfolio ./
 
 # Expose the port 'serve' will listen on (default is 3000)
 EXPOSE 3000

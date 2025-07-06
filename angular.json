@@ -18,6 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "baseHref": "/",
+            "deployUrl": "/",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
