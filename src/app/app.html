@@ -122,25 +122,67 @@
     <!-- HERO แบบเต็มจอ Snap -->
     <section
       id="heroSection"
-      class="snap-start h-screen flex flex-col justify-center items-center p-8"
+      class="snap-start h-screen flex flex-col justify-center items-center p-8 relative"
     >
+      <div class="parallax-layer" style="transform: translateY(0)"></div>
+
       <div
-        class="section-content flex flex-col items-center w-full h-full justify-center"
+        class="section-content flex flex-col items-center w-full h-full justify-center font-vintage-display relative"
       >
-        <h1 class="text-7xl md:text-9xl font-heading text-accent-gold mb-6">
-          SAHAPHAP
-        </h1>
-        <p class="text-xl text-gray-400 text-center max-w-2xl">
-          Developer จาก ม.บูรพา ที่สร้างเว็บสวยและใช้งานได้จริง
-        </p>
-        <button
-          class="mt-12 bg-primary-dark-btn py-3 px-8 rounded-full text-lg font-bold uppercase tracking-wider hover:bg-opacity-80 transition-all duration-300"
+        <p
+          class="text-lg text-gray-300 mb-2 tracking-widest animate-hero-fade-in"
         >
-          ดูผลงานของผม
-        </button>
+          My name is
+        </p>
+        <div class="relative mb-8">
+          <h1
+            class="text-7xl md:text-9xl font-vintage-thai hero-thai-interactive mb-2 animate-hero-glitch"
+          >
+            <span
+              class="tiger-trigger"
+              (mouseenter)="tigerMouseEnter()"
+              (mouseleave)="tigerMouseLeave()"
+            >
+              <span *ngIf="!tigerReplaced"
+                >ส
+                <span class="tiger-anim" aria-hidden="true">🐯</span>
+              </span>
+              <span
+                *ngIf="tigerReplaced"
+                class="tiger-static"
+                [class.tiger-static-animating]="tigerAnimating"
+                >🐯</span
+              > </span
+            ><span
+              [style]="{ 'margin-left': tigerReplaced ? '0.2em' : '-0.2em' }"
+              [class.shift-right]="tigerReplaced"
+              >หภาพ</span
+            >
+          </h1>
+          <div>
+            <h1
+              class="text-7xl md:text-9xl font-vintage-thai hero-thai-interactive mb-5 animate-hero-glitch"
+            >
+              Sahaphap
+            </h1>
+          </div>
+        </div>
+
+        <p
+          class="text-base text-accent-gold italic opacity-80 animate-hero-fade-in animate-delay-500 mb-2"
+        >
+          "Code is my canvas, creativity is my brush."
+        </p>
+      </div>
+
+      <!-- ลูกศรเลื่อนลงแบบสไตล์วินเทจ -->
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
+        <div class="vintage-scroll-indicator" (click)="scrollToNextSection()">
+          <div class="line"></div>
+          <div class="text">SCROLL</div>
+        </div>
       </div>
     </section>
-
     <!-- About Me Section -->
     <section
       id="aboutSection"
@@ -182,7 +224,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <!-- Front-End Development -->
           <div
-            class="bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
+            class="holographic-card bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
           >
             <h3 class="text-2xl font-heading text-accent-gold mb-4">
               Front-End Development
@@ -197,7 +239,7 @@
           </div>
           <!-- Back-End Development -->
           <div
-            class="bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
+            class="holographic-card bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
           >
             <h3 class="text-2xl font-heading text-accent-gold mb-4">
               Back-End Development
@@ -211,7 +253,7 @@
           </div>
           <!-- Cloud & Tools -->
           <div
-            class="bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
+            class="holographic-card bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
           >
             <h3 class="text-2xl font-heading text-accent-gold mb-4">
               Cloud & Tools
@@ -266,7 +308,7 @@
             <!-- Loop Project Cards -->
             <div
               *ngFor="let project of [1, 2, 3, 4, 5]"
-              class="bg-neutral-950 p-6 w-[400px] shrink-0 rounded-lg shadow-lg border border-border-dark hover:scale-105 transition-transform duration-300"
+              class="holographic-card bg-neutral-950 p-6 w-[400px] shrink-0 rounded-lg shadow-lg border border-border-dark hover:scale-105 transition-transform duration-300"
             >
               <img
                 [src]="`https://placehold.co/400x250/333333/F5F5DC?text=Project+${project}`"

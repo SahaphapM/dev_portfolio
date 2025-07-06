@@ -17,6 +17,10 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export class App implements AfterViewInit {
   title = 'dev_portfolio';
   isMenuOpen: boolean = false;
+  tigerReplaced: boolean = false;
+  tigerAnimating: boolean = false;
+  isAnimating: boolean = false; // ตัวแปรควบคุมการเล่นแอนิเมชัน
+  private animationTimeout: any; // สำหรับเก็บ setTimeout ID
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -54,7 +58,7 @@ export class App implements AfterViewInit {
           gsap.to(heroSection, {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 1.2,
             // delay: 0.8, // ดีเลย์สักครู่ก่อนแสดง
             ease: 'power3.out',
             onComplete: () => {
@@ -64,7 +68,7 @@ export class App implements AfterViewInit {
                 gsap.to(Array.from(heroContent.children), {
                   opacity: 1,
                   y: 0,
-                  duration: 0.5,
+                  duration: 0.8,
                   stagger: 0.3,
                   ease: 'power2.out',
                 });
@@ -115,9 +119,25 @@ export class App implements AfterViewInit {
                 }
               );
             }
+
+            gsap.to(el, {
+              scrollTrigger: {
+                trigger: el,
+                scroller: '#mainScrollWrapper',
+                start: 'top 85%',
+                end: 'bottom 60%',
+                toggleActions: 'play reverse play reverse', // ทำงานทั้งเลื่อนลงและเลื่อนขึ้น
+                markers: false,
+              },
+              opacity: 1,
+              y: 0,
+              rotationX: 0,
+              duration: 1,
+              ease: 'power3.out',
+            });
           }
         });
-      }, 600); // ⏱ ให้เวลา DOM settle ก่อน scrollTrigger ลงทะเบียน
+      }, 400); // ⏱ ให้เวลา DOM settle ก่อน scrollTrigger ลงทะเบียน
 
       const mainWrapper = document.getElementById('mainScrollWrapper');
       if (!mainWrapper) {
@@ -207,5 +227,76 @@ export class App implements AfterViewInit {
         });
       }
     });
+  }
+
+  scrollToNextSection() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const nextSection = document.getElementById('aboutSection');
+    const mainWrapper = document.getElementById('mainScrollWrapper');
+
+    if (nextSection && mainWrapper) {
+      // เพิ่ม animation ขณะเลื่อน
+      gsap.to(mainWrapper, {
+        scrollTo: { y: nextSection.offsetTop, autoKill: false },
+        duration: 1.5,
+        ease: 'power2.inOut',
+        onStart: () => {
+          // เพิ่ม effect ขณะเลื่อน
+          gsap.to('.scroll-down-indicator', {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.3,
+          });
+        },
+        onComplete: () => {
+          // คืนค่าเมื่อเลื่อนเสร็จ
+          gsap.to('.scroll-down-indicator', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            delay: 0.5,
+          });
+        },
+      });
+    }
+  }
+
+  onHeroMouseMove(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2; // -1 ถึง 1
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2; // -1 ถึง 1
+    // ปรับมุมเอียงให้ดูพอดี
+    target.style.setProperty('--x', `${x * 8}deg`);
+    target.style.setProperty('--y', `${-y * 8}deg`);
+  }
+
+  onHeroMouseLeave() {
+    const el = document.querySelector(
+      '.hero-thai-interactive[data-parallax]'
+    ) as HTMLElement;
+    if (el) {
+      el.style.setProperty('--x', '0deg');
+      el.style.setProperty('--y', '0deg');
+    }
+  }
+
+  tigerMouseEnter() {
+    clearTimeout(this.animationTimeout);
+    this.isAnimating = true;
+    this.tigerReplaced = false;
+    this.tigerAnimating = false;
+  }
+
+  tigerMouseLeave() {
+    this.isAnimating = true;
+    this.tigerAnimating = true;
+    this.tigerReplaced = true;
+
+    this.animationTimeout = setTimeout(() => {
+      this.tigerAnimating = false;
+      this.isAnimating = false;
+    }, 700);
   }
 }
