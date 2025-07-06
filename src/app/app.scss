@@ -284,10 +284,11 @@ html, body {
 }
 
 .tiger-trigger {
-  display: inline-block; /* ทำให้ span กำหนดความกว้างได้ */
+  display: inline-block; /* ทำให้ span กำหนดความกว้างได้ */  
+  position: relative; /* สำคัญมาก! สำหรับให้ child ที่เป็น absolute อ้างอิง */
   text-align: center;    /* จัดตัวอักษร/อีโมจิให้อยู่ตรงกลาง */
   width: 1.3em; /* กำหนดความกว้างเริ่มต้นให้พอดีกับ 'ส' (อาจต้องปรับค่า) */
-  position: relative;
+  height: 1.1em; /* อาจจะต้องกำหนดความสูงด้วยเพื่อความเสถียร */
   cursor: pointer;
   z-index: 2;
 }
@@ -299,10 +300,10 @@ html, body {
   position: absolute;
   left: 50%;
   bottom: 100%;
-  transform: translateX(-50%) translateY(10px) scale(0.7);
+  transform: translateX(-80%) translateY(10px) scale(0.7);
   opacity: 0;
   pointer-events: none;
-  font-size: 2.5em;
+  font-size: 1.8em;
   filter: drop-shadow(0 2px 8px #000a);
   transition: opacity 0.25s, transform 0.25s;
   z-index: 10;
@@ -310,13 +311,13 @@ html, body {
 .tiger-trigger:hover .tiger-anim,
 .tiger-trigger:focus .tiger-anim {
   opacity: 1;
-  transform: translateX(-50%) translateY(-24px) scale(1.1) rotate(-8deg);
+  transform: translateX(-80%) translateY(-24px) scale(1.1) rotate(-9deg);
   animation: tiger-pop 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 @keyframes tiger-pop {
-  0% { opacity: 0; transform: translateX(-50%) translateY(20px) scale(0.5) rotate(0deg); }
-  60% { opacity: 1; transform: translateX(-50%) translateY(-30px) scale(1.2) rotate(-12deg); }
-  100% { opacity: 1; transform: translateX(-50%) translateY(-24px) scale(1.1) rotate(-8deg); }
+  0% { opacity: 0; transform: translateX(-80%) translateY(20px) scale(0.5) rotate(0deg); }
+  60% { opacity: 1; transform: translateX(-80%) translateY(-30px) scale(1.2) rotate(-12deg); }
+  100% { opacity: 1; transform: translateX(-80%) translateY(-24px) scale(1.1) rotate(-8deg); }
 }
 
 .tiger-static {
@@ -347,5 +348,57 @@ html, body {
   100% {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* --- ส่วนสำหรับ 'n' หนู และ 'h' --- */
+.m-container {
+  display: inline-block;
+  position: relative;
+  width: 0.8em; /* ปรับให้พอดีกับ 'น' และ 'ห' */
+  height: 1.1em;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.original-n { /* เปลี่ยนเป็น original-n เพื่อให้ตรงกับ HTML */
+  display: inline-block;
+  /* หากต้องการให้ 'น' จางหายไปก่อนหนูจะ pop อาจเพิ่ม transition */
+}
+
+.morphed-h { /* เพิ่ม Style สำหรับตัว 'ห' */
+  display: inline-block;
+  /* อาจเพิ่ม animation ให้ 'ห' ปรากฏขึ้นมาอย่างนุ่มนวล */
+  animation: fade-in-h 0.3s ease-out forwards;
+}
+
+@keyframes fade-in-h {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.mouse-escape-anim {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  opacity: 0; /* เริ่มต้นซ่อนไว้ */
+  pointer-events: none;
+  animation: mouse-run-away 0.7s forwards ease-out;
+}
+
+@keyframes mouse-run-away {
+  0% {
+    opacity: 1; /* เริ่มแสดงผล */
+    transform: translate(-50%, -50%) scale(1); /* ตำแหน่งเริ่มต้นและขนาดปกติ */
+  }
+  20% { /* อาจจะขยับเล็กน้อยเพื่อแสดงว่ากำลังจะวิ่ง */
+    transform: translate(-40%, -60%) scale(1.1) rotate(-5deg);
+  }
+  100% {
+    opacity: 0; /* จางหายไป */
+    transform: translate(150px, -100px) scale(0.5) rotate(30deg); /* เคลื่อนที่ไปไกลและเล็กลง */
   }
 }

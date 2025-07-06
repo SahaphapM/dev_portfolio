@@ -20,7 +20,8 @@ export class App implements AfterViewInit {
   tigerReplaced: boolean = false;
   tigerAnimating: boolean = false;
   isAnimating: boolean = false; // ตัวแปรควบคุมการเล่นแอนิเมชัน
-  private animationTimeout: any; // สำหรับเก็บ setTimeout ID
+  private tigerAnimationTimeout: any; // สำหรับเก็บ setTimeout ID
+  private tigerStaticAnimDuration: number = 700; // ระยะเวลาของ @keyframes tiger-static-float-in (0.7s)
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -271,32 +272,21 @@ export class App implements AfterViewInit {
     target.style.setProperty('--x', `${x * 8}deg`);
     target.style.setProperty('--y', `${-y * 8}deg`);
   }
-
-  onHeroMouseLeave() {
-    const el = document.querySelector(
-      '.hero-thai-interactive[data-parallax]'
-    ) as HTMLElement;
-    if (el) {
-      el.style.setProperty('--x', '0deg');
-      el.style.setProperty('--y', '0deg');
-    }
-  }
-
   tigerMouseEnter() {
-    clearTimeout(this.animationTimeout);
-    this.isAnimating = true;
+    clearTimeout(this.tigerAnimationTimeout); // ล้าง timeout เก่าของเสือ
+    // รีเซ็ตสถานะเสือเพื่อพร้อมใช้งานใหม่
     this.tigerReplaced = false;
     this.tigerAnimating = false;
   }
 
   tigerMouseLeave() {
-    this.isAnimating = true;
-    this.tigerAnimating = true;
-    this.tigerReplaced = true;
+    // เริ่มแอนิเมชันเสือ
+    this.tigerAnimating = true; // เริ่มแอนิเมชันเสือ static-float-in
+    this.tigerReplaced = true; // เปลี่ยนเป็นแสดงเสือแบบ static
 
-    this.animationTimeout = setTimeout(() => {
-      this.tigerAnimating = false;
-      this.isAnimating = false;
-    }, 700);
+    // รอให้แอนิเมชัน tiger-static-float-in จบ
+    this.tigerAnimationTimeout = setTimeout(() => {
+      this.tigerAnimating = false; // ปิดคลาสแอนิเมชันเสือ
+    }, this.tigerStaticAnimDuration);
   }
 }
