@@ -339,5 +339,94 @@ html, body {
     opacity: 0; /* จางหายไป */
     transform: translate(150px, -100px) scale(0.5) rotate(30deg); /* เคลื่อนที่ไปไกลและเล็กลง */
   }
+  
 }
 
+
+/* ปรับระยะห่างและ padding ของ Detail Panel */
+.detail-panel {
+  width: 100%; /* บน mobile จะเต็มความกว้าง */
+  max-height: 100vh; /* จำกัดความสูงสูงสุด */
+  position: relative; /* สำหรับปุ่มปิด */
+  
+  /* สำหรับ desktop */
+  @media (min-width: 1024px) {
+    width: 500px; /* กำหนดความกว้างที่ต้องการ */
+    animation: slideIn 0.5s ease-out forwards;
+    
+    &.hiding {
+      animation: slideOut 0.3s ease-in forwards;
+    }
+  }
+  
+  /* ปรับ padding ให้ตรงกับ Card Project */
+  padding: 1.5rem !important; /* p-6 เทียบเท่ากับ Card Project */
+  
+  /* ปรับระยะห่างภายใน */
+  .space-y-6 > * + * {
+    margin-top: 1.5rem; /* ระยะห่างเทียบเท่ากับ gap-6 */
+  }
+  
+  /* ปรับระยะห่างจาก Card Project */
+  @media (min-width: 1024px) {
+    margin-left: 1.5rem; /* ml-6 เทียบเท่ากับ gap-8 ใน Card Project */
+  }
+  
+  /* ปรับแต่งเนื้อหาใน panel */
+  img {
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  
+  ul {
+    li {
+      margin-bottom: 0.5rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* Animation สำหรับ slide in/out */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+/* ปรับการแสดงผลบน mobile */
+@media (max-width: 1023px) {
+  .detail-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 90%;
+    max-width: 400px;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 1.5rem !important;
+    
+    &.translate-x-0 {
+      transform: translateX(0);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+    }
+  }
+  
+  /* เพิ่ม overlay สำหรับ mobile */
+  .panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 40;
+  }
+}

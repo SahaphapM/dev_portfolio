@@ -4,6 +4,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
+import { projects, Project } from '../data/projects';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -22,6 +23,29 @@ export class App implements AfterViewInit {
   isAnimating: boolean = false; // ตัวแปรควบคุมการเล่นแอนิเมชัน
   private tigerAnimationTimeout: any; // สำหรับเก็บ setTimeout ID
   private tigerStaticAnimDuration: number = 700; // ระยะเวลาของ @keyframes tiger-static-float-in (0.7s)
+
+  // Projects
+  projects: Project[] = projects;
+  selectedProject: Project | null = null;
+  closingPanel: boolean = false;
+
+  selectProject(project: Project) {
+    this.selectedProject = project;
+    this.closingPanel = false;
+
+    // ปิด panel ก่อนหน้าเมื่อเลือก project ใหม่
+    setTimeout(() => {
+      this.closingPanel = false;
+    }, 10);
+  }
+
+  closePanel() {
+    this.closingPanel = true;
+    setTimeout(() => {
+      this.selectedProject = null;
+      this.closingPanel = false;
+    }, 300);
+  }
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -271,6 +295,4 @@ export class App implements AfterViewInit {
       this.tigerAnimating = false; // ปิดคลาสแอนิเมชันเสือ
     }, this.tigerStaticAnimDuration);
   }
-
-  
 }
