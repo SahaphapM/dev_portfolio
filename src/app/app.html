@@ -189,83 +189,116 @@
         </div>
       </div>
     </section>
-    <!-- About Me Section -->
+    <!-- About + Skills Section -->
     <section
-      id="aboutSection"
-      class="snap-start min-h-screen py-20 px-8 bg-dark-bg border-t border-border-dark"
+      id="aboutSkillsSection"
+      class="snap-start min-h-screen py-20 px-8 bg-dark-bg border-t border-border-dark text-text-light"
     >
-      <div class="section-content max-w-5xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-heading text-accent-gold mb-8">
-          About Me
-        </h2>
-        <ul
-          class="text-left list-disc list-inside text-lg leading-relaxed mt-4"
-        >
-          <li>
-            เชี่ยวชาญในการออกแบบระบบและฐานข้อมูลเชิงสัมพันธ์ (Relational DB)
-          </li>
-          <li>
-            มีประสบการณ์พัฒนา Web Application ทั้งฝั่ง Frontend และ Backend
-          </li>
-          <li>ชอบเรียนรู้เทคโนโลยีใหม่และทำงานร่วมกับทีม</li>
-          <li>มีผลงานจริงทั้งจากมหาวิทยาลัยและโปรเจกต์รับจ้าง</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Skills & Expertise Section -->
-    <section
-      id="skillsSection"
-      class="snap-start min-h-screen py-20 px-8 bg-neutral-950 text-text-light border-t border-border-dark"
-    >
-      <div class="section-content max-w-5xl mx-auto">
+      <div class="section-content max-w-6xl mx-auto">
+        <!-- Heading -->
         <h2
-          class="text-4xl md:text-5xl font-heading text-accent-gold text-center mb-12"
+          class="text-4xl md:text-5xl font-heading text-accent-gold text-center mb-10"
         >
-          Skills & Expertise
+          About & Skills
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <!-- Front-End Development -->
+
+        <!-- Profile Summary -->
+        <div
+          class="text-lg md:text-xl leading-relaxed font-body text-center mb-8"
+        >
+          <p class="mb-4">
+            ผมชื่อ <strong>สหภาพ ฤทธิ์เนติกุล</strong> มีความชอบในการพัฒนา
+            Backend และ Fullstack Application
+          </p>
+          <p class="mb-4">
+            ถนัดด้านการออกแบบฐานข้อมูล (Relational DB), พัฒนา RESTful API
+            พร้อมเรียนรู้เทคโนโลยีใหม่ๆ และทำงานร่วมกับทีมอย่างมีประสิทธิภาพ
+          </p>
+        </div>
+
+        <!-- Tech Stack Grid -->
+        <h3 class="text-2xl font-heading text-accent-gold mb-6 text-center">
+          Technical Skills
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Programming -->
           <div
-            class="holographic-card bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
+            class="bg-dark-bg p-6 rounded-lg shadow border border-border-dark"
           >
-            <h3 class="text-2xl font-heading text-accent-gold mb-4">
-              Front-End Development
-            </h3>
-            <ul class="list-disc list-inside text-lg font-body space-y-2">
-              <li>Angular, React, Vue.js</li>
-              <li>JavaScript, TypeScript</li>
-              <li>HTML5, CSS3</li>
-              <li>Tailwind CSS</li>
-              <li>Responsive Design</li>
+            <h4 class="text-xl font-heading text-accent-gold mb-3">
+              Programming Languages
+            </h4>
+            <ul class="list-disc list-inside text-base space-y-1">
+              <li>Python, Java, Go, JavaScript/TypeScript, SQL</li>
             </ul>
           </div>
-          <!-- Back-End Development -->
+
+          <!-- Frontend -->
           <div
-            class="holographic-card bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
+            class="bg-dark-bg p-6 rounded-lg shadow border border-border-dark"
           >
-            <h3 class="text-2xl font-heading text-accent-gold mb-4">
-              Back-End Development
-            </h3>
-            <ul class="list-disc list-inside text-lg font-body space-y-2">
-              <li>Node.js (Express)</li>
-              <li>Python (Django/Flask)</li>
-              <li>Databases (SQL, NoSQL)</li>
-              <li>API Design & Development</li>
+            <h4 class="text-xl font-heading text-accent-gold mb-3">
+              Frontend Development
+            </h4>
+            <ul class="list-disc list-inside text-base space-y-1">
+              <li>Vue.js, Nuxt.js, Quasar, Vuetify</li>
+              <li>Tailwind CSS, DaisyUI, HTML/CSS</li>
+              <li>UX/UI Design, Figma, Miro</li>
             </ul>
           </div>
-          <!-- Cloud & Tools -->
+
+          <!-- Backend -->
           <div
-            class="holographic-card bg-dark-bg p-8 rounded-lg shadow-lg border border-border-dark"
+            class="bg-dark-bg p-6 rounded-lg shadow border border-border-dark"
           >
-            <h3 class="text-2xl font-heading text-accent-gold mb-4">
-              Cloud & Tools
-            </h3>
-            <ul class="list-disc list-inside text-lg font-body space-y-2">
-              <li>AWS, Google Cloud (Basic)</li>
-              <li>Git, Docker</li>
-              <li>CI/CD Principles</li>
-              <li>Figma (Basic UI/UX)</li>
+            <h4 class="text-xl font-heading text-accent-gold mb-3">
+              Backend Development
+            </h4>
+            <ul class="list-disc list-inside text-base space-y-1">
+              <li>NestJS, FastAPI, Strapi.js</li>
+              <li>Prisma ORM, TypeORM</li>
+              <li>REST APIs, GraphQL, Swagger</li>
+            </ul>
+          </div>
+
+          <!-- Databases -->
+          <div
+            class="bg-dark-bg p-6 rounded-lg shadow border border-border-dark"
+          >
+            <h4 class="text-xl font-heading text-accent-gold mb-3">
+              Databases
+            </h4>
+            <ul class="list-disc list-inside text-base space-y-1">
+              <li>MySQL, SQLite, MariaDB, MongoDB, Redis</li>
+              <li>Relational Design, Data Warehousing</li>
+            </ul>
+          </div>
+
+          <!-- DevOps & Deployment -->
+          <div
+            class="bg-dark-bg p-6 rounded-lg shadow border border-border-dark"
+          >
+            <h4 class="text-xl font-heading text-accent-gold mb-3">
+              DevOps & Deployment
+            </h4>
+            <ul class="list-disc list-inside text-base space-y-1">
+              <li>Docker, GitHub Actions (Runner on Linux)</li>
+              <li>Cloudflare Tunnel, Zero Trust</li>
+              <li>Vercel, Railway, Software Deployment</li>
+            </ul>
+          </div>
+
+          <!-- Tools & Soft Skills -->
+          <div
+            class="bg-dark-bg p-6 rounded-lg shadow border border-border-dark"
+          >
+            <h4 class="text-xl font-heading text-accent-gold mb-3">
+              Tools & Soft Skills
+            </h4>
+            <ul class="list-disc list-inside text-base space-y-1">
+              <li>Git, Postman, PhpMyAdmin, NetBeans</li>
+              <li>Business Analysis, Problem Solving, Team Leadership</li>
             </ul>
           </div>
         </div>
@@ -279,9 +312,9 @@
     >
       <div class="section-content relative z-10">
         <!-- Parallax Background -->
-        <div
+        <!-- <div
           class="absolute inset-0 bg-[url('https://r4.wallpaperflare.com/wallpaper/851/501/292/programming-code-minimalism-wallpaper-19e018bd515acdfb1647488fc03186dd.jpg')] opacity-5 bg-repeat z-0 animate-pulse"
-        ></div>
+        ></div> -->
 
         <!-- Glitch Title -->
         <div class="relative text-center z-10 mb-16">

@@ -41,8 +41,7 @@ export class App implements AfterViewInit {
 
       const sections = [
         'heroSection',
-        'aboutSection',
-        'skillsSection',
+        'aboutSkillsSection',
         'projectsSection',
         'ctaSection',
       ];
