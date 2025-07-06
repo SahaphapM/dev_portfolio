@@ -16,7 +16,7 @@
     <button
       class="relative z-50 flex flex-col justify-center items-center w-10 h-10 group focus:outline-none"
       (click)="toggleMenu()"
-      aria-label="Toggle Menu"
+      aria-label="Toggle navigation"
     >
       <span
         class="block w-8 h-0.5 bg-gray-100 transform transition-all duration-300 ease-in-out"
@@ -117,9 +117,7 @@
   <!-- ✅ Scroll Section เริ่มจากตรงนี้ พร้อม Snap & Scrollbar -->
   <div
     id="mainScrollWrapper"
-    class="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth"
-    tabindex="0"
-    aria-label="Main content sections"
+    class="snap-y snap-mandatory h-screen overflow-y-auto"
   >
     <!-- HERO แบบเต็มจอ Snap -->
     <section

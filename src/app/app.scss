@@ -2,10 +2,10 @@
 
 
 
-body {
-  overflow: hidden;
+html, body { 
   height: 100vh;
-  cursor: url("/assets/cursor.svg"), auto;
+  overflow-y: auto;
+  // cursor: url("assets/cursor.svg"), auto;
 }
 
 @keyframes glitch-1 {
@@ -72,6 +72,7 @@ body {
 
 
 #mainScrollWrapper {
+  position: relative; /* จำเป็นสำหรับ ScrollTrigger */
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
@@ -82,4 +83,17 @@ body {
 
 #mainScrollWrapper::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
+}
+#horizontalProjects {
+  overflow-x: visible; /* อนุญาตให้ scroll แนวนอน */
+}
+
+#heroSection {
+  opacity: 0; /* ซ่อนเริ่มต้น */
+  transform: translateY(0px); /* เลื่อนลงเล็กน้อย */
+}
+
+.section-content > * {
+  opacity: 0; /* ซ่อนเนื้อหาใน Hero */
+  transform: translateY(20px);
 }
