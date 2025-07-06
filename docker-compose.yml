@@ -1,3 +1,5 @@
+# my-angular-app/docker-compose.yml
+
 services:
   angular-frontend:
     # Build the Docker image using the Dockerfile in the current directory
@@ -5,13 +7,28 @@ services:
       context: .
       dockerfile: Dockerfile
       target: serve # Specify to build only up to the 'serve' stage
-    # Map port 3000 of the container to port 80 of the host
+    # ไม่ต้องแมปพอร์ตออกสู่โฮสต์อีกต่อไป เพราะ Nginx จะเป็นตัว Reverse Proxy
+    # ports:
+    #   - "3001:3000" # ลบหรือคอมเมนต์บรรทัดนี้ออก
+
+    # Optional: ถ้าอยากให้คอนเทนเนอร์รีสตาร์ทอัตโนมัติ
+    restart: unless-stopped
+
+  nginx-portfolio:
+    image: nginx:alpine # ใช้ Nginx Alpine เพื่อความเบา
+    # แมปพอร์ต 80 ของ Nginx Container ออกสู่พอร์ต 80 ของโฮสต์
+    # เพื่อให้ Cloudflare Tunnel สามารถเชื่อมต่อไปยังพอร์ตนี้ได้
+    # หรือจะใช้พอร์ตอื่นก็ได้ เช่น 81 ถ้า Nginx ตัวอื่นของคุณไม่ได้ใช้ 80
+    # แต่ถ้า Nginx ตัวอื่นของคุณใช้ 80 อยู่แล้ว และคุณต้องการให้ Cloudflare Tunnel
+    # ชี้ไปที่ Nginx ตัวใหม่นี้ คุณจะต้องเลือกพอร์ตที่ว่างบนโฮสต์
+    # สมมติว่า Nginx ตัวเก่าของคุณใช้ 80 อยู่แล้ว เราจะใช้ 81 สำหรับตัวนี้
     ports:
-      # 3001 is the port that will be exposed on the host machine
-      - "3001:3000"
-    # Optional: If you want to see the application logs
-    # logging:
-    #   driver: "json-file"
-    #   options:
-    #     max-size: "10m"
-    #     max-file: "5"
+      - "81:80" # แมปพอร์ต 80 ภายใน Nginx Container ไปยังพอร์ต 81 บนโฮสต์
+    volumes:
+      # เมาท์ไฟล์ config ที่เราสร้างขึ้น
+      - ./nginx-portfolio.conf:/etc/nginx/conf.d/default.conf:ro
+    # ให้ Nginx service เริ่มหลังจาก angular-frontend พร้อมแล้ว
+    depends_on:
+      - angular-frontend
+    # Optional: ถ้าอยากให้คอนเทนเนอร์รีสตาร์ทอัตโนมัติ
+    restart: unless-stopped
