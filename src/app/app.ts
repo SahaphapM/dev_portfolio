@@ -139,6 +139,7 @@ export class App implements AfterViewInit {
         });
       }, 400); // ⏱ ให้เวลา DOM settle ก่อน scrollTrigger ลงทะเบียน
 
+      // Custom scroll snap smoothing
       const mainWrapper = document.getElementById('mainScrollWrapper');
       if (!mainWrapper) {
         console.warn('MainWrapper not ready');
@@ -174,6 +175,7 @@ export class App implements AfterViewInit {
               e.preventDefault();
               return;
             }
+
             const now = Date.now();
             if (now - lastScrollTime < 800) {
               // Prevent rapid scrolls
@@ -206,25 +208,6 @@ export class App implements AfterViewInit {
           },
           { passive: false }
         );
-      }
-
-      const track = document.getElementById('horizontalTrack');
-      const wrapper = document.getElementById('horizontalProjects');
-
-      if (track && wrapper) {
-        const scrollLength = track.scrollWidth - window.innerWidth;
-
-        gsap.to(track, {
-          x: -scrollLength,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: wrapper,
-            start: 'top top',
-            end: `+=${scrollLength}`,
-            scrub: true,
-            pin: true,
-          },
-        });
       }
     });
   }
@@ -288,4 +271,6 @@ export class App implements AfterViewInit {
       this.tigerAnimating = false; // ปิดคลาสแอนิเมชันเสือ
     }, this.tigerStaticAnimDuration);
   }
+
+  
 }

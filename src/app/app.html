@@ -174,7 +174,7 @@
           "Every bug disappears on my machine."
         </p>
         <p
-          class="italic opacity-80 animate-hero-fade-in animate-delay-500"
+          class="animate-hero-fade-in animate-delay-500"
           style="font-size: 0.8em"
         >
           Somewhere else? No promises.
@@ -305,88 +305,148 @@
       </div>
     </section>
 
-    <!-- ✅ Horizontal Scroll + Parallax + Glitch + Custom Cursor version of Featured Projects -->
     <section
       id="projectsSection"
-      class="snap-start relative min-h-screen bg-dark-bg text-text-light py-20 border-t border-border-dark overflow-hidden"
+      class="snap-start relative bg-dark-bg text-text-light py-24 px-6 md:px-20 border-t border-border-dark"
     >
-      <div class="section-content relative z-10">
-        <!-- Parallax Background -->
-        <!-- <div
-          class="absolute inset-0 bg-[url('https://r4.wallpaperflare.com/wallpaper/851/501/292/programming-code-minimalism-wallpaper-19e018bd515acdfb1647488fc03186dd.jpg')] opacity-5 bg-repeat z-0 animate-pulse"
-        ></div> -->
-
-        <!-- Glitch Title -->
-        <div class="relative text-center z-10 mb-16">
-          <h2
-            class="text-6xl md:text-8xl font-heading text-text-light uppercase relative"
-          >
-            <span
-              class="absolute inset-0 text-accent-gold animate-glitch-1"
-              aria-hidden="true"
-              >Featured Projects</span
-            >
-            <span
-              class="absolute inset-0 text-gray-500 animate-glitch-2"
-              aria-hidden="true"
-              >Featured Projects</span
-            >
-            <span class="relative">Featured Projects</span>
-          </h2>
-        </div>
-
-        <!-- Horizontal Scroll Wrapper -->
-        <div
-          id="horizontalProjects"
-          class="relative w-full overflow-x-hidden h-[500px] z-10"
+      <div class="parallax-layer" style="transform: translateY(0)"></div>
+      <div class="section-content max-w-screen-xl mx-auto text-center">
+        <!-- Title with shimmer glow -->
+        <h2
+          class="text-5xl md:text-7xl font-heading text-accent-gold mb-16 relative inline-block"
         >
-          <div id="horizontalTrack" class="flex space-x-10 px-8 w-[3000px]">
-            <!-- Loop Project Cards -->
-            <div
-              *ngFor="let project of [1, 2, 3, 4, 5]"
-              class="holographic-card bg-neutral-950 p-6 w-[400px] shrink-0 rounded-lg shadow-lg border border-border-dark hover:scale-105 transition-transform duration-300"
+          <span class="relative z-10">Projects</span>
+          <span
+            class="absolute inset-0 bg-gradient-to-r from-accent-gold/10 to-transparent blur-xl animate-pulse rounded-lg"
+          ></span>
+        </h2>
+
+        <!-- Grid layout with hover interactivity -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <!-- Project Card 1 -->
+          <div
+            class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:shadow-accent-gold/40 hover:scale-105 transition-transform"
+          >
+            <img
+              src="/assets/img/projects/skillmapping.png"
+              class="rounded-lg mb-4 w-full h-48 object-cover"
+            />
+            <h3 class="text-2xl font-bold mb-2 text-accent-gold">
+              Skill Mapping System
+            </h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Dashboard for curriculum/skills tracking using Quasar + Prisma.
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs text-gray-400">
+              <span class="bg-gray-800 px-2 py-1 rounded">Quasar</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">Prisma</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">NestJS</span>
+            </div>
+          </div>
+          <!-- Project Card 2 -->
+          <div
+            class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:scale-105 hover:shadow-accent-gold/40 transition-all duration-300"
+          >
+            <img
+              src="/assets/img/projects/cooperative.png"
+              class="rounded-lg mb-4 w-full h-48 object-cover"
+            />
+            <h3 class="text-2xl font-bold mb-2 text-accent-gold">
+              Cooperative Training
+            </h3>
+            <p class="text-sm text-gray-300 mb-4">
+              OCR-powered certificate hours, secure auto-deploy via GitHub
+              Runner & Cloudflare Tunnel.
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs text-gray-400">
+              <span class="bg-gray-800 px-2 py-1 rounded">Vue</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">FastAPI</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">MongoDB</span>
+            </div>
+            <!-- <div class="absolute top-2 right-2 text-accent-gold text-xl">
+            ✨
+          </div> -->
+            <a
+              href="https://cooperative.sahapham.uk"
+              target="_blank"
+              class="mt-4 inline-block bg-accent-gold text-white font-bold text-sm px-4 py-2 rounded-full hover:bg-opacity-80 transition-all"
             >
-              <img
-                [src]="`https://placehold.co/400x250/333333/F5F5DC?text=Project+${project}`"
-                class="rounded-md mb-4 border border-border-dark"
-              />
-              <h3 class="text-2xl font-heading mb-2">
-                ชื่อโปรเจกต์ {{ project }}
-              </h3>
-              <p class="text-gray-400 font-body mb-4">
-                คำอธิบายเกี่ยวกับโปรเจกต์ {{ project }} ที่คุณภูมิใจนำเสนอ
-              </p>
-              <a
-                href="/portfolio/project-{{ project }}"
-                class="inline-block bg-primary-dark-btn text-text-light py-2 px-5 rounded-full text-sm font-bold hover:bg-opacity-80 transition-all"
-              >
-                ดูรายละเอียด
-              </a>
+              View
+            </a>
+          </div>
+          <!-- Project Card 3 -->
+
+          <div
+            class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:scale-105 transition-transform"
+          >
+            <img
+              src="/assets/img/projects/goodsuitbrand.png"
+              class="rounded-lg mb-4 w-full h-48 object-cover"
+            />
+            <h3 class="text-2xl font-bold mb-2 text-accent-gold">
+              Goodsuit Blog
+            </h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Headless CMS storefront using WordPress + Nuxt + GraphQL.
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs text-gray-400">
+              <span class="bg-gray-800 px-2 py-1 rounded">WordPress</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">GraphQL</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">Nuxt</span>
+            </div>
+            <!-- <div class="absolute bottom-2 left-2 text-accent-gold text-xl">
+            🛒
+          </div> -->
+            <a
+              href="https://www.goodsuitbrand.com/blogs"
+              target="_blank"
+              class="mt-4 inline-block bg-accent-gold text-white font-bold text-sm px-4 py-2 rounded-full hover:bg-opacity-80 transition-all"
+            >
+              View
+            </a>
+          </div>
+
+          <div
+            class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:scale-105 transition-transform"
+          >
+            <img
+              src="/img/projects/rtg.jpg"
+              class="rounded-lg mb-4 w-full h-48 object-cover"
+            />
+            <h3 class="text-2xl font-bold mb-2 text-accent-gold">
+              RTG Quotation System
+            </h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Fullstack app with PDF quotes, secured via Cloudflare Zero Trust.
+            </p>
+            <div class="flex flex-wrap gap-2 text-xs text-gray-400">
+              <span class="bg-gray-800 px-2 py-1 rounded">Nuxt</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">NestJS</span>
+              <span class="bg-gray-800 px-2 py-1 rounded">Cloudflare</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
+      <!-- Spacer before CTA -->
+      <div class="h-20"></div>
 
-    <!-- Call to Action (Optional, if not covered by footer) -->
-    <section
-      id="ctaSection"
-      class="snap-start min-h-screen py-20 px-8 bg-neutral-950 text-text-light text-center border-t border-border-dark"
-    >
-      <div class="section-content max-w-4xl mx-auto">
+      <!-- Contact CTA -->
+      <div
+        class="bg-neutral-950 text-center py-20 px-8 border-t border-border-dark rounded-xl shadow-inner"
+      >
         <h2 class="text-4xl md:text-5xl font-heading text-text-light mb-6">
           Ready to Create Something Great?
         </h2>
         <p class="text-lg md:text-xl text-gray-400 mb-8 font-body">
-          ถ้าคุณมีไอเดียเจ๋งๆ หรือกำลังมองหา Developer ที่พร้อมลุย
-          <br class="hidden md:block" />มาคุยกันได้เลยครับ
-          ผมพร้อมช่วยเปลี่ยนวิสัยทัศน์ของคุณให้เป็นจริง!
+          Have an idea? Looking for a developer who can make it real?
+          <br class="hidden md:block" />Let’s build something impactful
+          together.
         </p>
         <a
           href="/contacts"
           class="bg-primary-dark-btn text-text-light py-4 px-8 rounded-full text-lg font-bold uppercase tracking-wider hover:bg-opacity-80 transition-all duration-300 shadow-lg hover:shadow-xl"
         >
-          ติดต่อผมได้เลย
+          Contact Me
         </a>
       </div>
     </section>
@@ -396,10 +456,8 @@
     class="fixed bottom-0 left-0 right-0 z-50 p-6 flex justify-between items-center bg-transparent text-gray-400 text-sm"
   >
     <div class="flex space-x-4">
-      <p>NY</p>
-      <p>DUBAI</p>
-      <p>KYIV</p>
+      <p>🛠 Angular + GSAP + TailwindCSS</p>
     </div>
-    <p>© 2025 VINTAGE</p>
+    <p>© 2025 Sahaphap Ritnetikun ❤️</p>
   </footer>
 </div>
