@@ -1,0 +1,17 @@
+services:
+  angular-frontend:
+    # Build the Docker image using the Dockerfile in the current directory
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: serve # Specify to build only up to the 'serve' stage
+    # Map port 3000 of the container to port 80 of the host
+    ports:
+      # 3001 is the port that will be exposed on the host machine
+      - "3001:3000"
+    # Optional: If you want to see the application logs
+    # logging:
+    #   driver: "json-file"
+    #   options:
+    #     max-size: "10m"
+    #     max-file: "5"
