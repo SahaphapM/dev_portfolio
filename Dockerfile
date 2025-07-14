@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npx ng build --configuration production --project my-tailwind-portfolio
+RUN npx ng build --configuration production --project dev_portfolio
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine

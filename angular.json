@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-tailwind-portfolio": {
+    "dev_portfolio": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -76,6 +76,18 @@
               "src/styles.scss"
             ]
           }
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "dev_portfolio:build:production"
+            },
+            "development": {
+              "buildTarget": "dev_portfolio:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }
