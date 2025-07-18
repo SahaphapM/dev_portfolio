@@ -10,12 +10,12 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.html',
-  styleUrls: ['./app.scss'],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [CommonModule],
 })
-export class App implements AfterViewInit {
+export class AppComponent implements AfterViewInit {
   title = 'dev_portfolio';
   isMenuOpen: boolean = false;
   tigerReplaced: boolean = false;
