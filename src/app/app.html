@@ -1,5 +1,7 @@
 <!-- Wrapper ชั้นนอกสุด -->
-<div class="bg-neutral-950 text-text-light font-body relative overflow-hidden">
+<div
+  class="bg-neutral-950 text-text-light font-body relative overflow-hidden"
+  (click)="onClickOutside($event)">
   <!-- Fixed Header / HUD -->
   <header
     class="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center bg-transparent"
@@ -313,7 +315,7 @@
           [class.lg:grid-cols-[minmax(0,1fr)_500px]="selectedProject"
         >
           <!-- Project Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full">
             <div
               *ngFor="let project of projects"
               (click)="selectProject(project)"
@@ -358,6 +360,7 @@
             class="detail-panel hidden lg:block bg-neutral-900 border border-border-dark p-6 rounded-2xl overflow-y-auto transition-all duration-500"
             [class.translate-x-0]="selectedProject && !closingPanel"
             [class.translate-x-full]="closingPanel"
+            (click)="$event.stopPropagation()"
           >
             <!-- ปุ่มปิด -->
             <button

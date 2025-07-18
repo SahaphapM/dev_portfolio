@@ -46,6 +46,22 @@ export class App implements AfterViewInit {
     }
   }
 
+  // Handle click outside the detail panel
+  onClickOutside(event: MouseEvent) {
+    const panel = document.querySelector('.detail-panel');
+    const target = event.target as HTMLElement;
+
+    // ถ้าไม่ได้คลิกที่ panel และ panel กำลังแสดงอยู่
+    if (
+      panel &&
+      !panel.contains(target) &&
+      this.selectedProject &&
+      !this.closingPanel
+    ) {
+      this.closePanel();
+    }
+  }
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   toggleMenu(): void {
