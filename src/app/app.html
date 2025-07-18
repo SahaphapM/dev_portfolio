@@ -311,14 +311,18 @@
         <div
           class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_0fr] transition-all duration-500"
           [class.lg:grid-cols-[minmax(0,1fr)_500px]="selectedProject"
-          (mouseleave)="closePanel()"
         >
           <!-- Project Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
             <div
               *ngFor="let project of projects"
-              (mouseenter)="selectProject(project)"
-              class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:shadow-accent-gold/40 hover:scale-105 transition-transform"
+              (click)="selectProject(project)"
+              class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:shadow-accent-gold/40 hover:scale-105 transition-transform cursor-pointer"
+              tabindex="0"
+              (keyup.enter)="selectProject(project)"
+              (keyup.space)="selectProject(project); $event.preventDefault()"
+              role="button"
+
             >
               <img
                 [src]="project.image"
@@ -386,7 +390,7 @@
                 class="rounded mb-4 w-full h-40 object-cover"
               />
               <p class="text-sm text-gray-300">
-                {{ selectedProject?.description }}
+                {{ selectedProject?.fullDescription }}
               </p>
               <div class="flex flex-wrap gap-2 mt-4 text-xs text-gray-400">
                 <span
