@@ -25,7 +25,7 @@ export const projects: Project[] = [
     ปัญหาการ Log Error ที่ไม่ละเอียด: TypeORM มีปัญหาเรื่อง DTO Validation ที่ทำให้ Log Error ไม่ละเอียด ผมแก้ด้วยการ เปลี่ยนไปใช้ Prisma ซึ่งมีการ Log Error ที่ละเอียดกว่า ทำให้สามารถหาสาเหตุของ Error ได้ง่ายขึ้น
     ความไม่ต่อเนื่องของการทำงาน: เพื่อลดปัญหาการต้องกลับมาทำความเข้าใจ Process หรือระบบซ้ำๆ ผมได้ จัดทำเอกสารและ Diagram ที่ชัดเจน เพื่อให้สามารถทบทวนและทำงานต่อได้อย่างราบรื่น`,
     image: '/assets/img/projects/skillmapping.png',
-    technologies: ['Quasar', 'Prisma', 'NestJS', 'SQL'],
+    technologies: ['Quasar', 'Prisma', 'NestJS', 'TypeORM', 'SQL'],
   },
   {
     title: 'Cooperative Training',
@@ -39,7 +39,17 @@ export const projects: Project[] = [
     ความถูกต้องของ OCR ภาษาไทย: พบปัญหาเรื่องความถูกต้องของการดึงข้อมูลภาษาไทยด้วย OCR ผมแก้โดยการ ใช้ np.array แทนรูปภาพโดยตรง ซึ่งช่วยเพิ่มความแม่นยำในการประมวลผล
     NER Model Tuning: แม้จะลองใช้ LLM ที่ฉลาด แต่ Model มีขนาดใหญ่และประมวลผลช้า จึงเลือกใช้ XLM ที่เฉพาะสำหรับ NER และยังคงต้อง เพิ่มกระบวนการ Tuning Model ให้ฉลาดและแม่นยำยิ่งขึ้น โดยการทำ Input เป็น Tokenized Word ที่ถูกต้อง`,
     image: '/assets/img/projects/cooperative.png',
-    technologies: ['Vue', 'FastAPI', 'MongoDB', 'Golang', 'Docker'],
+    technologies: [
+      'Vue',
+      'FastAPI',
+      'MongoDB',
+      'Golang',
+      'Mongo Driver',
+      'Docker',
+      'GitHub Action',
+      'OCR',
+      'XLM Roberta',
+    ],
     link: 'https://cooperative.sahapham.uk',
   },
   {
@@ -108,7 +118,7 @@ export const projects: Project[] = [
     ความท้าทายและการแก้ไขปัญหา:
     การทำความเข้าใจ Error Log: พบปัญหาการไม่เข้าใจว่า Error เกิดจากอะไรและดู Log ไม่เป็น ซึ่งเป็นอุปสรรคสำคัญในการแก้ไขปัญหา ผมแก้ไขโดยการ เรียนรู้การอ่าน Error Log อย่างละเอียด และพยายามทำความเข้าใจความหมายของข้อความ Error ต่างๆ`,
     image: '/assets/img/projects/deecoffee_java.png',
-    technologies: ['Java', 'NetBeans', 'SQLite'],
+    technologies: ['Java', 'Java JWT', 'NetBeans', 'SQLite'],
   },
   {
     title: 'Consent Central (PDPA Hackathon)',

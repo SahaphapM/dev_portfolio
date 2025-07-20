@@ -1,6 +1,6 @@
 // src/app/app.component.ts
-import { AfterViewInit, Component, PLATFORM_ID, Inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
@@ -27,23 +27,22 @@ export class AppComponent implements AfterViewInit {
   // Projects
   projects: Project[] = projects;
   selectedProject: Project | null = null;
-  closingPanel: boolean = false; // เพิ่มตัวแปรสำหรับ animation ปิด
 
-  selectProject(project: Project) {
+  isDialogVisible = false;
+  isClosing = false;
+
+  selectProject(project: any) {
     this.selectedProject = project;
-    this.closingPanel = false;
+    this.isDialogVisible = true;
+    this.isClosing = false;
   }
 
   closePanel() {
-    if (this.selectedProject && !this.closingPanel) {
-      this.closingPanel = true;
-
-      // รอให้ animation slide out เสร็จสมบูรณ์ก่อนลบข้อมูล
-      setTimeout(() => {
-        this.selectedProject = null;
-        this.closingPanel = false;
-      }, 100); // ตรงกับระยะเวลาของ transition
-    }
+    this.isClosing = true;
+    setTimeout(() => {
+      this.isDialogVisible = false;
+      this.selectedProject = null;
+    }, 200); // match fadeOut duration
   }
 
   // Handle click outside the detail panel
@@ -56,13 +55,11 @@ export class AppComponent implements AfterViewInit {
       panel &&
       !panel.contains(target) &&
       this.selectedProject &&
-      !this.closingPanel
+      !this.isClosing
     ) {
       this.closePanel();
     }
   }
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -71,9 +68,6 @@ export class AppComponent implements AfterViewInit {
   animationInitialized = false; // เพิ่มตัวแปร flag
 
   ngAfterViewInit(): void {
-    if (this.animationInitialized || !isPlatformBrowser(this.platformId))
-      return;
-
     this.animationInitialized = true;
     requestAnimationFrame(() => {
       // Your GSAP animations here
@@ -216,32 +210,51 @@ export class AppComponent implements AfterViewInit {
             }
 
             const now = Date.now();
-            if (now - lastScrollTime < 800) {
-              // Prevent rapid scrolls
+            if (now - lastScrollTime < 1000) {
               e.preventDefault();
               return;
             }
+
+            // ถ้า scroll แรงเกิน (เช่น scroll mouse gaming mouse)
+            if (Math.abs(e.deltaY) > 200) {
+              e.preventDefault();
+              return;
+            }
+
             const currentScroll = mainWrapper.scrollTop;
             const currentIdx = getNearestSectionIdx(currentScroll);
             let targetIdx = currentIdx;
+
             if (e.deltaY > 30 && currentIdx < sectionEls.length - 1) {
               targetIdx = currentIdx + 1;
             } else if (e.deltaY < -30 && currentIdx > 0) {
-              targetIdx = currentIdx - 1;
+              const currentSectionTop = sectionEls[currentIdx].offsetTop;
+
+              if (currentScroll <= currentSectionTop + 10) {
+                targetIdx = currentIdx - 1;
+              } else {
+                return;
+              }
             } else {
-              return; // No section change
+              return;
             }
+
             if (targetIdx === currentIdx) return;
+
             e.preventDefault();
             isAnimating = true;
             lastScrollTime = now;
+
             const targetTop = sectionEls[targetIdx].offsetTop;
             gsap.to(mainWrapper, {
               scrollTo: { y: targetTop },
-              duration: 1.3, // slower scroll (seconds)
+              duration: 1.3,
               ease: 'power2.inOut',
               onComplete: () => {
-                isAnimating = false;
+                // ✅ ปลดล็อกหลัง delay พอสมควร
+                setTimeout(() => {
+                  isAnimating = false;
+                }, 200);
               },
             });
           },
@@ -252,8 +265,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   scrollToNextSection() {
-    if (!isPlatformBrowser(this.platformId)) return;
-
     const nextSection = document.getElementById('aboutSection');
     const mainWrapper = document.getElementById('mainScrollWrapper');
 
@@ -309,5 +320,22 @@ export class AppComponent implements AfterViewInit {
     this.tigerAnimationTimeout = setTimeout(() => {
       this.tigerAnimating = false; // ปิดคลาสแอนิเมชันเสือ
     }, this.tigerStaticAnimDuration);
+  }
+
+  getTechIcon(tech: string): string {
+    const icons = {
+      Vue: 'fab fa-vuejs',
+      Golang: 'fab fa-golang',
+      TypeScript: 'fab fa-js',
+      MongoDB: 'fas fa-database',
+      Docker: 'fab fa-docker',
+      Nuxt: 'fab fa-nuxt-js',
+      NestJS: 'fas fa-server',
+      SQL: 'fas fa-database',
+      GraphQL: 'fas fa-project-diagram',
+      Java: 'fab fa-java',
+      // ... เพิ่มเติมตามเทคโนโลยี
+    };
+    return icons[tech as keyof typeof icons] || 'fas fa-code';
   }
 }

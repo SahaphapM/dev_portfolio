@@ -1,7 +1,8 @@
 <!-- Wrapper ชั้นนอกสุด -->
 <div
   class="bg-neutral-950 text-text-light font-body relative overflow-hidden"
-  (click)="onClickOutside($event)">
+  (click)="onClickOutside($event)"
+>
   <!-- Fixed Header / HUD -->
   <header
     class="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center bg-transparent"
@@ -297,129 +298,91 @@
       id="projectsSection"
       class="snap-start relative bg-dark-bg text-text-light py-24 px-6 md:px-20 border-t border-border-dark"
     >
-      <div class="parallax-layer" style="transform: translateY(0)"></div>
-      <div class="section-content max-w-screen-xl mx-auto">
-        <!-- Title -->
-        <h2
-          class="text-5xl md:text-7xl font-heading text-accent-gold mb-16 text-center relative inline-block"
+      <h2 class="text-5xl md:text-7xl font-heading text-center mb-16 relative">
+        <span
+          class="bg-gradient-to-r from-accent-gold via-pink-500 to-cyan-400 bg-clip-text text-transparent animate-gradient-move drop-shadow-neon"
         >
-          <span class="relative z-10">Projects</span>
-          <span
-            class="absolute inset-0 bg-gradient-to-r from-accent-gold/10 to-transparent blur-xl animate-pulse rounded-lg"
-          ></span>
-        </h2>
-
-        <!-- เปลี่ยน Container หลักเป็น Grid -->
+          🚀 Projects
+        </span>
+        <span
+          class="absolute left-1/2 -translate-x-1/2 bottom-0 w-40 h-2 bg-accent-gold/20 blur-xl rounded-full animate-pulse"
+        ></span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10">
         <div
-          class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_0fr] transition-all duration-500"
-          [class.lg:grid-cols-[minmax(0,1fr)_500px]="selectedProject"
+          class="group bg-white/10 p-4 rounded-xl backdrop-blur shadow-lg cursor-pointer hover:scale-[1.02] transition"
+          *ngFor="let project of projects"
+          (click)="selectProject(project)"
         >
-          <!-- Project Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full">
-            <div
-              *ngFor="let project of projects"
-              (click)="selectProject(project)"
-              class="group relative bg-neutral-950 border border-border-dark p-6 rounded-2xl overflow-hidden shadow-xl hover:shadow-accent-gold/40 hover:scale-105 transition-transform cursor-pointer"
-              tabindex="0"
-              (keyup.enter)="selectProject(project)"
-              (keyup.space)="selectProject(project); $event.preventDefault()"
-              role="button"
-
+          <img
+            [src]="project.image"
+            alt="project"
+            class="rounded-lg w-full h-40 object-cover mb-4"
+          />
+          <h3 class="text-xl font-semibold text-white mb-2">
+            {{ project.title }}
+          </h3>
+          <p class="text-sm text-gray-300">{{ project.description }}</p>
+          <div class="flex flex-wrap gap-1 mt-4">
+            <span
+              *ngFor="let tech of project.technologies"
+              class="px-2 py-1 text-xs bg-accent-gold/10 text-accent-gold rounded-full"
+              >{{ tech }}</span
             >
-              <img
-                [src]="project.image"
-                class="rounded-lg mb-4 w-full h-48 object-cover"
-              />
-              <h3 class="text-2xl font-bold mb-2 text-accent-gold">
-                {{ project.title }}
-              </h3>
-              <p class="text-sm text-gray-300 mb-4">
-                {{ project.description }}
-              </p>
-              <div class="flex flex-wrap gap-2 text-xs text-gray-400">
-                <span
-                  *ngFor="let tech of project.technologies"
-                  class="bg-gray-800 px-2 py-1 rounded"
-                  >{{ tech }}</span
-                >
-              </div>
-              <a
-                *ngIf="project.link"
-                [href]="project.link"
-                target="_blank"
-                class="mt-4 inline-block bg-accent-gold text-white font-bold text-sm px-4 py-2 rounded-full hover:bg-opacity-80 transition-all"
-              >
-                View
-              </a>
-            </div>
-          </div>
-
-          <!-- Detail Panel - เพิ่ม padding และ margin ให้ตรงกับ Card Project -->
-          <div
-            *ngIf="selectedProject || closingPanel"
-            class="detail-panel hidden lg:block bg-neutral-900 border border-border-dark p-6 rounded-2xl overflow-y-auto transition-all duration-500"
-            [class.translate-x-0]="selectedProject && !closingPanel"
-            [class.translate-x-full]="closingPanel"
-            (click)="$event.stopPropagation()"
-          >
-            <!-- ปุ่มปิด -->
-            <button
-              (click)="selectedProject = null"
-              class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <div class="space-y-6">
-              <!-- เพิ่ม wrapper สำหรับจัดระยะห่างภายใน -->
-              <h4 class="text-xl font-bold mb-2 text-accent-gold">
-                {{ selectedProject?.title }}
-              </h4>
-              <img
-                *ngIf="selectedProject?.image"
-                [src]="selectedProject?.image"
-                class="rounded mb-4 w-full h-40 object-cover"
-              />
-              <p class="text-sm text-gray-300">
-                {{ selectedProject?.fullDescription }}
-              </p>
-              <div class="flex flex-wrap gap-2 mt-4 text-xs text-gray-400">
-                <span
-                  *ngFor="let tech of selectedProject?.technologies"
-                  class="bg-gray-800 px-2 py-1 rounded"
-                  >{{ tech }}</span
-                >
-              </div>
-            </div>
           </div>
         </div>
       </div>
-      <!-- Spacer before CTA -->
-      <div class="h-20"></div>
 
-      <!-- Contact CTA
+      <!-- 🔥 Project Detail Dialog -->
       <div
-        class="bg-neutral-950 text-center py-20 px-8 border-t border-border-dark rounded-xl shadow-inner"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+      [ngClass]="{
+        'animate-backdrop-in': !isClosing,
+        'animate-backdrop-out': isClosing
+      }"
+      *ngIf="isDialogVisible"
+    >
+      <div
+        class="relative w-[90vw] max-w-3xl bg-gradient-to-br from-[#1f1f1f] to-[#2c2c2c] text-white rounded-2xl shadow-2xl p-8 overflow-auto max-h-[90vh]"
+        [ngClass]="{
+          'animate-dialog-in': !isClosing,
+          'animate-dialog-out': isClosing
+        }"
       >
-        <a
-          href="/contacts"
-          class="bg-primary-dark-btn text-text-light py-4 px-8 rounded-full text-lg font-bold uppercase tracking-wider hover:bg-opacity-80 transition-all duration-300 shadow-lg hover:shadow-xl"
+        <!-- Close Button -->
+        <button
+          class="absolute top-4 right-4 text-2xl hover:text-accent-gold transition"
+          (click)="closePanel()"
         >
-          Contact Me
-        </a>
-      </div> -->
+          &times;
+        </button>
+
+          <!-- 📸 Image -->
+          <img
+            [src]="selectedProject?.image"
+            class="w-full rounded-xl mb-4 max-h-64 object-cover shadow"
+          />
+
+          <!-- 📝 Title -->
+          <h2 class="text-3xl font-bold mb-2 text-gradient">
+            {{ selectedProject?.title }}
+          </h2>
+
+          <!-- 🧠 Tech Stack -->
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              *ngFor="let tech of selectedProject?.technologies"
+              class="px-3 py-1 text-xs bg-accent-gold/20 text-accent-gold rounded-full"
+              >{{ tech }}</span
+            >
+          </div>
+
+          <!-- 📖 Full Description -->
+          <p class="text-sm text-gray-200 whitespace-pre-line leading-relaxed">
+            {{ selectedProject?.fullDescription }}
+          </p>
+        </div>
+      </div>
     </section>
   </div>
   <!-- Footer -->

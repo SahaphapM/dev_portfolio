@@ -1,4 +1,4 @@
-html, body { 
+html, body {
   height: 100vh;
   overflow-y: auto;
   // cursor: url("assets/cursor.svg"), auto;
@@ -107,7 +107,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     linear-gradient(45deg, rgba(18, 18, 18, 0.8) 0%, transparent 100%),
     radial-gradient(circle at 10% 20%, rgba(218, 165, 32, 0.185) 0%, transparent 40%);
   z-index: -1;
@@ -147,10 +147,10 @@ html, body {
 .vintage-scroll-indicator .line {
   width: 1px;
   height: 50px;
-  background: linear-gradient(to bottom, 
-    transparent, 
-    rgba(218, 165, 32, 0.8) 20%, 
-    rgba(218, 165, 32, 0.8) 80%, 
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(218, 165, 32, 0.8) 20%,
+    rgba(218, 165, 32, 0.8) 80%,
     transparent);
   position: relative;
   overflow: hidden;
@@ -222,7 +222,7 @@ html, body {
 }
 
 .tiger-trigger {
-  display: inline-block; /* ทำให้ span กำหนดความกว้างได้ */  
+  display: inline-block; /* ทำให้ span กำหนดความกว้างได้ */
   position: relative; /* สำคัญมาก! สำหรับให้ child ที่เป็น absolute อ้างอิง */
   text-align: center;    /* จัดตัวอักษร/อีโมจิให้อยู่ตรงกลาง */
   width: 1.3em; /* กำหนดความกว้างเริ่มต้นให้พอดีกับ 'ส' (อาจต้องปรับค่า) */
@@ -339,40 +339,40 @@ html, body {
     opacity: 0; /* จางหายไป */
     transform: translate(150px, -100px) scale(0.5) rotate(30deg); /* เคลื่อนที่ไปไกลและเล็กลง */
   }
-  
+
 }
 
 .detail-panel {
   transform: translateX(100%);
   opacity: 0;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.3s ease-out;
-  
+
   &.translate-x-0 {
     transform: translateX(0);
     opacity: 1;
   }
-  
+
   &.translate-x-full {
     transform: translateX(100%);
     opacity: 0;
   }
-  
+
   /* ปรับแต่งเพิ่มเติม */
   width: 100%;
   max-height: 100vh;
   position: relative;
   padding: 1.5rem;
-  
+
   .space-y-6 > * + * {
     margin-top: 1.5rem;
   }
-  
+
   @media (min-width: 1024px) {
     width: 500px;
     margin-left: 1.5rem;
   }
-  
+
   @media (max-width: 1023px) {
     position: fixed;
     top: 0;
@@ -382,9 +382,67 @@ html, body {
     height: 100vh;
     z-index: 50;
     box-shadow: -5px 0 25px rgba(0,0,0,0.5);
-    
+
     &.translate-x-0 {
       transform: translateX(0);
     }
   }
+}
+
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutScale {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.animate-dialog-in {
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+.animate-dialog-out {
+  animation: fadeOutScale 0.2s ease-in forwards;
+}
+
+
+@keyframes fadeBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeBackdropOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-backdrop-in {
+  animation: fadeBackdropIn 0.3s ease-out forwards;
+}
+
+.animate-backdrop-out {
+  animation: fadeBackdropOut 0.3s ease-in forwards;
 }
