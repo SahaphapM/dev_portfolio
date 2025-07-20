@@ -65,6 +65,19 @@ export class AppComponent implements AfterViewInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  scrollToSection(targetId: string) {
+    const mainWrapper = document.getElementById('mainScrollWrapper');
+    const target = document.querySelector(targetId);
+
+    if (mainWrapper && target) {
+      gsap.to(mainWrapper, {
+        scrollTo: { y: (target as HTMLElement).offsetTop },
+        duration: 1.3,
+        ease: 'power2.inOut',
+      });
+    }
+  }
+
   animationInitialized = false; // เพิ่มตัวแปร flag
 
   ngAfterViewInit(): void {

@@ -65,18 +65,18 @@
         <li
           *ngFor="
             let item of [
-              { label: 'Main page', path: '/' },
-              { label: 'Skills', path: '/about' },
-              { label: 'Projects', path: '/portfolio' }
+              { label: 'Main page', path: '#heroSection' },
+              { label: 'Skills', path: '#aboutSkillsSection' },
+              { label: 'Projects', path: '#projectsSection' }
             ];
             let i = index
           "
           class="relative group overflow-hidden"
         >
           <a
-            [href]="item.path"
+            href="javascript:void(0)"
+            (click)="scrollToSection(item.path); toggleMenu()"
             class="block py-2 px-4 hover:text-accent-gold transition-colors duration-300 relative z-10"
-            (click)="toggleMenu()"
           >
             <span
               class="absolute left-0 top-0 w-full h-full bg-accent-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"
@@ -173,7 +173,7 @@
 
       <!-- ลูกศรเลื่อนลงแบบสไตล์วินเทจ -->
       <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
-        <div class="vintage-scroll-indicator" (click)="scrollToNextSection()">
+        <div class="vintage-scroll-indicator" (click)="scrollToSection('#aboutSkillsSection')">
           <div class="line"></div>
           <div class="text">SCROLL DOWN</div>
         </div>
