@@ -74,7 +74,7 @@ export const projects: Project[] = [
     ความท้าทายและการแก้ไขปัญหา:
     ข้อจำกัดด้านเวลา: เนื่องจากต้องเรียนไปด้วยและมีงานซ้อนกัน ทำให้มีเวลาในการ Implement น้อย ผมแก้ด้วยการ แบ่งเวลาและบริหารจัดการความเครียด ในการทำงานอย่างมีประสิทธิภาพ
     การส่งมอบงานที่ไม่สมบูรณ์: พบปัญหาการส่งมอบงานที่ยังไม่สมบูรณ์เนื่องจาก ไม่ได้ทำ Test Case และความเร่งด่วน ซึ่งเป็นบทเรียนสำคัญที่ต้องนำไปปรับปรุงในการทำงานครั้งต่อไป`,
-    image: '/assets/img/projects/rtg.jpg',
+    image: '/assets/img/projects/rtg.png',
     technologies: ['Nuxt', 'NestJS', 'Cloudflare', 'SQL', 'Docker'],
   },
   {
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     technologies: ['Vue', 'Quasar', 'NestJS', 'SQL'],
   },
   {
-    title: 'POS Deecoffee (Online Store)',
+    title: 'POS D.Coffee (Online Store)',
     description:
       'Developed Point of Sale, Promotion, and User Authentication systems for an online store. Contributed to team coordination and problem-solving.',
     fullDescription: `ในโปรเจกต์กลุ่มนี้ ผมมีส่วนร่วมในการ พัฒนาระบบ POS (Point of Sale), ระบบ Promotion และ User Authentication ซึ่งเป็นหัวใจสำคัญของระบบขายของออนไลน์ เทคโนโลยีที่ใช้ได้แก่ Vue, Vuetify, TypeScript, NestJS, SQLite, และ phpMyAdmin
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: 'POS Deecoffee (Java)',
+    title: 'POS D.Coffee (Java)',
     description:
       'Developed Point of Sale and Promotion systems using Java. Focused on UI development with Java AWT and NetBeans.',
     fullDescription: `โปรเจกต์กลุ่มนี้เป็นการ พัฒนาระบบ POS และ Promotion โดยใช้ Java ซึ่งเป็นการเรียนรู้พื้นฐานที่สำคัญ ผมได้มีส่วนร่วมในการ สร้างส่วนหน้าจอของระบบด้วย Java AWT โดยใช้ NetBeans เทคโนโลยีที่ใช้คือ Java, NetBeans, และ SQLite

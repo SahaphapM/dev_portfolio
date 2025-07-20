@@ -174,10 +174,12 @@ export class AppComponent implements AfterViewInit {
 
       // Custom scroll snap smoothing
       const mainWrapper = document.getElementById('mainScrollWrapper');
+      const projectSection = document.getElementById('projectsSection');
       if (!mainWrapper) {
         console.warn('MainWrapper not ready');
         return;
       }
+
       if (mainWrapper) {
         // Custom slow scroll snap for all sections
         let isAnimating = false;
@@ -208,6 +210,11 @@ export class AppComponent implements AfterViewInit {
               e.preventDefault();
               return;
             }
+
+            // if (this.isDialogVisible) {
+            //   e.preventDefault(); // ❌ Block scroll snap logic
+            //   return;
+            // }
 
             const now = Date.now();
             if (now - lastScrollTime < 1000) {

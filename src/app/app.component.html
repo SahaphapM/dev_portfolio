@@ -1,6 +1,6 @@
 <!-- Wrapper ชั้นนอกสุด -->
 <div
-  class="bg-neutral-950 text-text-light font-body relative overflow-hidden"
+  class="bg-neutral-950 text-text-light font-body relative overflow-hidden "
   (click)="onClickOutside($event)"
 >
   <!-- Fixed Header / HUD -->
@@ -107,6 +107,7 @@
   <div
     id="mainScrollWrapper"
     class="snap-y snap-mandatory h-screen overflow-y-auto"
+
   >
     <!-- HERO แบบเต็มจอ Snap -->
     <section
@@ -186,7 +187,7 @@
       <div class="section-content max-w-6xl mx-auto">
         <!-- Heading -->
         <h2
-          class="text-4xl md:text-5xl font-heading text-accent-gold text-center mb-10"
+          class="text-4xl md:text-5xl  text-accent-gold text-center mb-10 font-vintage-display"
         >
           About & Skills
         </h2>
@@ -207,7 +208,7 @@
 
         <!-- Tech Stack Grid -->
         <h3 class="text-2xl font-heading text-accent-gold mb-6 text-center">
-          Technical Skills
+           Skills
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -296,11 +297,12 @@
 
     <section
       id="projectsSection"
-      class="snap-start relative bg-dark-bg text-text-light py-24 px-6 md:px-20 border-t border-border-dark"
+      class="snap-start bg-dark-bg text-text-light py-24 px-6 md:px-20 border-t border-border-dark"
     >
+    <div class="section-content max-w-6xl mx-auto">
       <h2 class="text-5xl md:text-7xl font-heading text-center mb-16 relative">
         <span
-          class="bg-gradient-to-r from-accent-gold via-pink-500 to-cyan-400 bg-clip-text text-transparent animate-gradient-move drop-shadow-neon"
+          class="font-vintage-display bg-gradient-to-r from-accent-gold via-pink-500 to-cyan-400 bg-clip-text text-transparent animate-gradient-move drop-shadow-neon"
         >
           🚀 Projects
         </span>
@@ -332,22 +334,26 @@
           </div>
         </div>
       </div>
-
+    </div>
       <!-- 🔥 Project Detail Dialog -->
       <div
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+      *ngIf="isDialogVisible"
       [ngClass]="{
         'animate-backdrop-in': !isClosing,
         'animate-backdrop-out': isClosing
       }"
-      *ngIf="isDialogVisible"
+
+      (click)="closePanel()"
+
     >
       <div
-        class="relative w-[90vw] max-w-3xl bg-gradient-to-br from-[#1f1f1f] to-[#2c2c2c] text-white rounded-2xl shadow-2xl p-8 overflow-auto max-h-[90vh]"
+        class="relative w-[90vw] max-w-3xl bg-gradient-to-br from-[#1f1f1f] to-[#2c2c2c] text-white rounded-2xl shadow-2xl p-8 overflow-auto max-h-[100vh]"
         [ngClass]="{
           'animate-dialog-in': !isClosing,
           'animate-dialog-out': isClosing
         }"
+        (click)="$event.stopPropagation()"
       >
         <!-- Close Button -->
         <button
@@ -401,12 +407,12 @@
     <a
       href="https://www.linkedin.com/in/saha-dev"
       target="_blank"
-      class="linkedin-button flex items-center justify-center w-14 h-14 rounded-full bg-gray-800 hover:bg-linkedin-blue transition-all duration-300 group"
+      class="linkedin-button flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 hover:bg-linkedin-blue transition-all duration-300 group"
       aria-label="Visit Sahaphap's LinkedIn profile"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8 group-hover:text-white transition-colors"
+        class="h-5 w-5 group-hover:text-white transition-colors"
         viewBox="0 0 24 24"
         fill="currentColor"
       >
